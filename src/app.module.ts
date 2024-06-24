@@ -10,7 +10,7 @@ import { PedidosModule } from './modules/pedidos/pedidos.module';
   imports: [AuthModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot(
-      `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_CLUSTER}.hkghaqf.mongodb.net/${process.env.MONGODB_DATABASE}?retryWrites=true&w=majority`,
+      `mongodb+srv://emymatista:wjJZE0fNMwij2gk2@cluster2.hkghaqf.mongodb.net/pedidos?retryWrites=true&w=majority`,
     ),
     PedidosModule,
   ],
