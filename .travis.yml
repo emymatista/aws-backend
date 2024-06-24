@@ -17,13 +17,22 @@ before_script:
   - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
   - aws configure set default.region $AWS_DEFAULT_REGION
 
+script:
+  - npm install
+  - npm run build
+  - npm test
+
+env:
+  global:
+    - MONGODB_URI=$MONGODB_URI # Ensure this environment variable is set in Travis CI settings
+
 jobs:
   include:
     - stage: Backend Deployment
       name: 'Run Backend Deployment'
       script:
         - cd aws-backend
-        - aws ecr get-login-password --region $AWS_DEFAULT_REGION| docker login --username AWS --password-stdin $AWS_ECR_DOCKER_REGISTRY
+        - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ECR_DOCKER_REGISTRY
         - docker build -t $AWS_ECR_REGISTRY_NAME .
         - docker tag $AWS_ECR_REGISTRY_NAME:latest $AWS_ECR_DOCKER_REGISTRY/$AWS_ECR_REGISTRY_NAME:latest
         - docker push $AWS_ECR_DOCKER_REGISTRY/$AWS_ECR_REGISTRY_NAME:latest

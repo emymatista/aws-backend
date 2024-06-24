@@ -1,0 +1,25 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - EXTERNAL_PORT=3000
+      - MONGODB_USER=emymatista
+      - MONGODB_PASS=wjJZE0fNMwij2gk2
+      - MONGODB_DATABASE=pedidos
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: emymatista
+      MONGO_INITDB_ROOT_PASSWORD: wjJZE0fNMwij2gk2
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
