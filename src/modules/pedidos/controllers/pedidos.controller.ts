@@ -5,7 +5,7 @@ import { CreatePedidoDto } from '../dto/create-pedido.dto';
 import { Pedido } from '../schemas/pedidos.schema';
 import { UpdatePedidoDto } from '../dto/update-pedido.dto';
 
-@Controller('pedidos2222')
+@Controller('pedidos')
 export class PedidosController {
     constructor(private readonly pedidosService: PedidosService) {}
 
